@@ -1,3 +1,10 @@
-<p>
-  ,,,,,
-</p>
+<% if current_user %>
+  <div>
+    当前登录用户是: <%= current_user.email %>
+    <span style="padding-left: 200px">
+      <%= link_to '退出', destroy_user_session_path, method: :delete %>
+    </span>
+  </div>
+<% else %>
+  <%= link_to '登录', new_user_session_path %>
+<% end %>

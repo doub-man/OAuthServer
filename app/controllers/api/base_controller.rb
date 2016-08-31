@@ -1,11 +1,11 @@
 module Api
   class BaseController < ::ApplicationController
     protect_from_forgery with: :null_session
-    respond_to           :json
+    before_action :current_resource_owner
 
     private
     def current_resource_owner
-      User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
+      @current_resource_owner ||= User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
     end
   end
 
